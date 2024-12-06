@@ -1,9 +1,10 @@
 'use strict';
 
 let randomNumber;
-const holdBtn = document.querySelector('.btn--hold');
-const rollDicebBtn = document.querySelector('.btn--roll');
 const diceImg = document.querySelector('.dice');
+const rollDicebBtn = document.querySelector('.btn--roll');
+const holdBtn = document.querySelector('.btn--hold');
+const newGameBtn = document.querySelector('.btn--new');
 
 //PLAYERS
 const firstPlayer = document.querySelector('.player--0');
@@ -36,7 +37,6 @@ rollDicebBtn.addEventListener('click', function () {
 
   if (randomNumber !== 1) {
     if (firstPlayer.classList.contains('player--active')) {
-      console.log(firstTotal);
       firstCurrent += randomNumber;
       firstPlayerCurrScore.textContent = firstCurrent;
     } else {
@@ -79,4 +79,24 @@ holdBtn.addEventListener('click', function () {
     secondCurrent = 0;
     secondPlayerCurrScore.textContent = secondCurrent;
   }
+});
+
+newGameBtn.addEventListener('click', function () {
+  //Reinitializes CURRENT SCORES
+  firstCurrent = 0;
+  secondCurrent = 0;
+
+  firstPlayerCurrScore.textContent = firstCurrent;
+  secondPlayerCurrScore.textContent = secondCurrent;
+
+  //Reinitializes TOTAL SCORES
+  firstTotal = 0;
+  secondTotal = 0;
+
+  firstPlayerTotalScore.textContent = firstTotal;
+  secondPlayerTotalScore.textContent = secondTotal;
+
+  //Undisplay the dice
+
+  diceImg.classList.add('hidden');
 });
