@@ -45,9 +45,17 @@ rollDicebBtn.addEventListener('click', function () {
     if (firstPlayer.classList.contains('player--active')) {
       firstPlayer.classList.remove('player--active');
       secondPlayer.classList.add('player--active');
+      firstTotal += firstCurrent;
+      firstPlayerTotalScore.textContent = firstTotal;
+      firstCurrent = 0;
+      firstPlayerCurrScore.textContent = firstCurrent;
     } else {
       firstPlayer.classList.add('player--active');
       secondPlayer.classList.remove('player--active');
+      secondTotal += secondCurrent;
+      secondPlayerTotalScore.textContent = secondTotal;
+      secondCurrent = 0;
+      secondPlayerCurrScore.textContent = secondCurrent;
     }
   }
 });
