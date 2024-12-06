@@ -17,7 +17,7 @@ const dice = document.querySelector('.dice');
 const btnRoll = document.querySelector('.btn--roll');
 const hold = document.querySelector('.btn--hold');
 
-const randomNumber = Math.round(Math.random() * 6);
+let randomNumber = Math.round(Math.random() * 6);
 
 //Initializing CURRENT SCORES
 
@@ -42,4 +42,20 @@ hold.addEventListener('click', function () {
     playerFirst.classList.add('player--active');
     playerSecond.classList.remove('player--active');
   }
+});
+
+btnRoll.addEventListener('click', function () {
+  console.log(randomNumber);
+
+  if (randomNumber === 1) {
+    if (playerFirst.classList.contains('player--active')) {
+      playerFirst.classList.remove('player--active');
+      playerSecond.classList.add('player--active');
+    } else if (playerSecond.classList.contains('player--active')) {
+      playerFirst.classList.add('player--active');
+      playerSecond.classList.remove('player--active');
+    }
+  }
+
+  randomNumber = Math.round(Math.random() * 6);
 });
