@@ -35,16 +35,15 @@ rollDicebBtn.addEventListener('click', function () {
   diceImg.src = `dice-${randomNumber}.png`;
   diceImg.classList.remove('hidden');
 
-  if (randomNumber !== 1) {
+  if (randomNumber !== 1 && firstTotal < 100 && secondTotal < 100) {
     if (firstPlayer.classList.contains('player--active')) {
       firstCurrent += randomNumber;
       firstPlayerCurrScore.textContent = firstCurrent;
     } else {
-      console.log(secondTotal);
       secondCurrent += randomNumber;
       secondPlayerCurrScore.textContent = secondCurrent;
     }
-  } else {
+  } else if (randomNumber === 1 && firstTotal < 100 && secondTotal < 100) {
     if (firstPlayer.classList.contains('player--active')) {
       firstPlayer.classList.remove('player--active');
       secondPlayer.classList.add('player--active');
@@ -60,8 +59,16 @@ rollDicebBtn.addEventListener('click', function () {
       secondCurrent = 0;
       secondPlayerCurrScore.textContent = secondCurrent;
     }
+  } else {
+    if (firstTotal >= 100) {
+      console.log('player 1 wins');
+    } else if (secondTotal >= 100) {
+      console.log('player 2 wins');
+    }
   }
 });
+// console.log(firstTotal);
+// console.log(secondTotal);
 
 holdBtn.addEventListener('click', function () {
   if (firstPlayer.classList.contains('player--active')) {
