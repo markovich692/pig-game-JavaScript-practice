@@ -33,3 +33,13 @@ let totalSecond = 0;
 
 firstTotalScore.textContent = totalFirst;
 secondTotalScore.textContent = totalSecond;
+
+hold.addEventListener('click', function () {
+  if (playerFirst.classList.contains('player--active')) {
+    playerFirst.classList.remove('player--active');
+    playerSecond.classList.add('player--active');
+  } else if (playerSecond.classList.contains('player--active')) {
+    playerFirst.classList.add('player--active');
+    playerSecond.classList.remove('player--active');
+  }
+});
