@@ -1,6 +1,7 @@
 'use strict';
 
 let randomNumber;
+const holdBtn = document.querySelector('.btn--hold');
 const rollDicebBtn = document.querySelector('.btn--roll');
 const diceImg = document.querySelector('.dice');
 
@@ -35,9 +36,11 @@ rollDicebBtn.addEventListener('click', function () {
 
   if (randomNumber !== 1) {
     if (firstPlayer.classList.contains('player--active')) {
+      console.log(firstTotal);
       firstCurrent += randomNumber;
       firstPlayerCurrScore.textContent = firstCurrent;
     } else {
+      console.log(secondTotal);
       secondCurrent += randomNumber;
       secondPlayerCurrScore.textContent = secondCurrent;
     }
@@ -57,5 +60,23 @@ rollDicebBtn.addEventListener('click', function () {
       secondCurrent = 0;
       secondPlayerCurrScore.textContent = secondCurrent;
     }
+  }
+});
+
+holdBtn.addEventListener('click', function () {
+  if (firstPlayer.classList.contains('player--active')) {
+    firstPlayer.classList.remove('player--active');
+    secondPlayer.classList.add('player--active');
+    firstTotal += firstCurrent;
+    firstPlayerTotalScore.textContent = firstTotal;
+    firstCurrent = 0;
+    firstPlayerCurrScore.textContent = firstCurrent;
+  } else {
+    firstPlayer.classList.add('player--active');
+    secondPlayer.classList.remove('player--active');
+    secondTotal += secondCurrent;
+    secondPlayerTotalScore.textContent = secondTotal;
+    secondCurrent = 0;
+    secondPlayerCurrScore.textContent = secondCurrent;
   }
 });
