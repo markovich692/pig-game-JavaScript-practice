@@ -4,6 +4,10 @@ let randomNumber;
 const rollDicebBtn = document.querySelector('.btn--roll');
 const diceImg = document.querySelector('.dice');
 
+//PLAYERS
+const firstPlayer = document.querySelector('.player--0');
+const secondPlayer = document.querySelector('.player--1');
+
 //CURRENT SCORES
 let firstPlayerCurrScore = document.querySelector('#current--0');
 let secondPlayerCurrScore = document.querySelector('#current--1');
@@ -30,9 +34,20 @@ rollDicebBtn.addEventListener('click', function () {
   diceImg.classList.remove('hidden');
 
   if (randomNumber !== 1) {
-    firstCurrent += randomNumber;
-    firstPlayerCurrScore.textContent = firstCurrent;
+    if (firstPlayer.classList.contains('player--active')) {
+      firstCurrent += randomNumber;
+      firstPlayerCurrScore.textContent = firstCurrent;
+    } else {
+      secondCurrent += randomNumber;
+      secondPlayerCurrScore.textContent = secondCurrent;
+    }
   } else {
-    console.log('it is equal 1');
+    if (firstPlayer.classList.contains('player--active')) {
+      firstPlayer.classList.remove('player--active');
+      secondPlayer.classList.add('player--active');
+    } else {
+      firstPlayer.classList.add('player--active');
+      secondPlayer.classList.remove('player--active');
+    }
   }
 });
