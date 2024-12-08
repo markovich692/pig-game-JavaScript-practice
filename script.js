@@ -6,104 +6,31 @@ const rollDicebBtn = document.querySelector('.btn--roll');
 const holdBtn = document.querySelector('.btn--hold');
 const newGameBtn = document.querySelector('.btn--new');
 
-//PLAYERS
-const firstPlayer = document.querySelector('.player--0');
-const secondPlayer = document.querySelector('.player--1');
+//Reinitializes TOTAL SCORES
 
-//CURRENT SCORES
-let firstPlayerCurrScore = document.querySelector('#current--0');
-let secondPlayerCurrScore = document.querySelector('#current--1');
+let totalScorefirst = 0;
+let totalScoreSecond = 0;
 
-let firstCurrent = 0;
-let secondCurrent = 0;
+document.querySelector('#score--0').textContent = totalScorefirst;
+document.querySelector('#score--1').textContent = totalScoreSecond;
 
-firstPlayerCurrScore.textContent = firstCurrent;
-secondPlayerCurrScore.textContent = secondCurrent;
+//Reinitializes CURRENT SCORES
 
-//TOTAL SCORES
-let firstPlayerTotalScore = document.querySelector('#score--0');
-let secondPlayerTotalScore = document.querySelector('#score--1');
+let currentScoreFirst = 0;
+let currentScoreSecond = 0;
 
-let firstTotal = 0;
-let secondTotal = 0;
+document.querySelector('#current--0').textContent = currentScoreFirst;
+document.querySelector('#current--1').textContent = currentScoreSecond;
 
-firstPlayerTotalScore.textContent = firstTotal;
-secondPlayerTotalScore.textContent = secondTotal;
+let activePlayer = 0;
+let currentPlayerScore = 0;
 
-// rollDicebBtn.addEventListener('click', function () {
-//   randomNumber = Math.floor(Math.random() * 6) + 1;
-//   diceImg.src = `dice-${randomNumber}.png`;
-//   diceImg.classList.remove('hidden');
+rollDicebBtn.addEventListener('click', function () {
+  let randomDice = Math.floor(Math.random() * 6) + 1;
+  diceImg.classList.remove('hidden');
+  diceImg.src = `dice-${randomDice}.png`;
 
-//   if (randomNumber !== 1 && firstTotal < 100 && secondTotal < 100) {
-//     if (firstPlayer.classList.contains('player--active')) {
-//       firstCurrent += randomNumber;
-//       firstPlayerCurrScore.textContent = firstCurrent;
-//     } else {
-//       secondCurrent += randomNumber;
-//       secondPlayerCurrScore.textContent = secondCurrent;
-//     }
-//   } else if (randomNumber === 1 && firstTotal < 100 && secondTotal < 100) {
-//     if (firstPlayer.classList.contains('player--active')) {
-//       firstPlayer.classList.remove('player--active');
-//       secondPlayer.classList.add('player--active');
-//       firstTotal += firstCurrent;
-//       firstPlayerTotalScore.textContent = firstTotal;
-//       firstCurrent = 0;
-//       firstPlayerCurrScore.textContent = firstCurrent;
-//     } else {
-//       firstPlayer.classList.add('player--active');
-//       secondPlayer.classList.remove('player--active');
-//       secondTotal += secondCurrent;
-//       secondPlayerTotalScore.textContent = secondTotal;
-//       secondCurrent = 0;
-//       secondPlayerCurrScore.textContent = secondCurrent;
-//     }
-//   } else {
-//     if (firstTotal >= 100) {
-//       console.log('player 1 wins');
-//     } else if (secondTotal >= 100) {
-//       console.log('player 2 wins');
-//     }
-//   }
-// });
-// // console.log(firstTotal);
-// // console.log(secondTotal);
-
-// holdBtn.addEventListener('click', function () {
-//   if (firstPlayer.classList.contains('player--active')) {
-//     firstPlayer.classList.remove('player--active');
-//     secondPlayer.classList.add('player--active');
-//     firstTotal += firstCurrent;
-//     firstPlayerTotalScore.textContent = firstTotal;
-//     firstCurrent = 0;
-//     firstPlayerCurrScore.textContent = firstCurrent;
-//   } else {
-//     firstPlayer.classList.add('player--active');
-//     secondPlayer.classList.remove('player--active');
-//     secondTotal += secondCurrent;
-//     secondPlayerTotalScore.textContent = secondTotal;
-//     secondCurrent = 0;
-//     secondPlayerCurrScore.textContent = secondCurrent;
-//   }
-// });
-
-// newGameBtn.addEventListener('click', function () {
-//   //Reinitializes CURRENT SCORES
-//   firstCurrent = 0;
-//   secondCurrent = 0;
-
-//   firstPlayerCurrScore.textContent = firstCurrent;
-//   secondPlayerCurrScore.textContent = secondCurrent;
-
-//   //Reinitializes TOTAL SCORES
-//   firstTotal = 0;
-//   secondTotal = 0;
-
-//   firstPlayerTotalScore.textContent = firstTotal;
-//   secondPlayerTotalScore.textContent = secondTotal;
-
-//   //Undisplay the dice
-
-//   diceImg.classList.add('hidden');
-// });
+  currentPlayerScore = currentPlayerScore + randomDice;
+  document.getElementById(`current--${activePlayer}`).textContent =
+    currentPlayerScore;
+});
