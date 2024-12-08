@@ -51,9 +51,14 @@ rollDicebBtn.addEventListener('click', function () {
 
 document.querySelector('.btn--hold').addEventListener('click', function () {
   scores[activePlayer] = scores[activePlayer] + currentPlayerScore;
-
   document.querySelector(`#score--${activePlayer}`).textContent =
     scores[activePlayer];
 
-  switchPlayer();
+  if (scores[activePlayer] < 20) {
+    switchPlayer();
+  } else {
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.add('player--winner');
+  }
 });
