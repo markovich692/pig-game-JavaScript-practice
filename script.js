@@ -8,12 +8,18 @@ const holdBtn = document.querySelector('.btn--hold');
 const newGameBtn = document.querySelector('.btn--new');
 
 //Reinitializes TOTAL SCORES
-
 let totalScorefirst = 0;
 let totalScoreSecond = 0;
 
 document.querySelector('#score--0').textContent = totalScorefirst;
 document.querySelector('#score--1').textContent = totalScoreSecond;
+
+//Reinitializes CURRENT SCORES
+let currentScorefirst = 0;
+let currentScoreSecond = 0;
+
+document.querySelector('#current--0').textContent = currentScorefirst;
+document.querySelector('#current--1').textContent = currentScoreSecond;
 
 let activePlayer = 0;
 let scores = [0, 0];
@@ -58,7 +64,7 @@ document.querySelector('.btn--hold').addEventListener('click', function () {
     document.querySelector(`#score--${activePlayer}`).textContent =
       scores[activePlayer];
 
-    if (scores[activePlayer] < 100) {
+    if (scores[activePlayer] < 10) {
       switchPlayer();
     } else {
       diceImg.classList.add('hidden');
@@ -66,6 +72,34 @@ document.querySelector('.btn--hold').addEventListener('click', function () {
         .querySelector(`.player--${activePlayer}`)
         .classList.add('player--winner');
       playing = false;
+    }
+  }
+});
+
+document.querySelector('.btn--new').addEventListener('click', function () {
+  diceImg.classList.add('hidden');
+
+  //Reinitializes TOTAL SCORES
+  totalScorefirst = 0;
+  totalScoreSecond = 0;
+
+  document.querySelector('#score--0').textContent = totalScorefirst;
+  document.querySelector('#score--1').textContent = totalScoreSecond;
+
+  //Reinitializes CURRENT SCORES
+  currentScorefirst = 0;
+  currentScoreSecond = 0;
+
+  document.querySelector('#current--0').textContent = currentScorefirst;
+  document.querySelector('#current--1').textContent = currentScoreSecond;
+
+  const players = document.querySelectorAll('.player');
+
+  for (let i = 0; i < players.length; i++) {
+    console.log(players[i]);
+
+    if (players[i].classList.contains('player--winner')) {
+      players[i].classList.remove('player--winner');
     }
   }
 });
