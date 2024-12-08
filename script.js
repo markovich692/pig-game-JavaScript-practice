@@ -77,21 +77,24 @@ document.querySelector('.btn--hold').addEventListener('click', function () {
 });
 
 document.querySelector('.btn--new').addEventListener('click', function () {
+  console.log();
+  playing = true;
   diceImg.classList.add('hidden');
 
   //Reinitializes TOTAL SCORES
-  totalScorefirst = 0;
-  totalScoreSecond = 0;
+  currentPlayerScore = 0;
+  document.getElementById(`current--${activePlayer}`).textContent =
+    currentPlayerScore;
+  scores = [0, 0];
+  activePlayer = 0;
 
-  document.querySelector('#score--0').textContent = totalScorefirst;
-  document.querySelector('#score--1').textContent = totalScoreSecond;
+  document.querySelector('#score--0').textContent = scores[0];
+  document.querySelector('#score--1').textContent = scores[1];
 
   //Reinitializes CURRENT SCORES
-  currentScorefirst = 0;
-  currentScoreSecond = 0;
 
-  document.querySelector('#current--0').textContent = currentScorefirst;
-  document.querySelector('#current--1').textContent = currentScoreSecond;
+  //   document.querySelector('#score--0').textContent = scores[0];
+  //   document.querySelector('#score--1').textContent = scores[1];
 
   const players = document.querySelectorAll('.player');
 
