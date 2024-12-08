@@ -24,6 +24,7 @@ document.querySelector('#current--1').textContent = currentScoreSecond;
 let activePlayer = 0;
 let scores = [0, 0];
 let currentPlayerScore = 0;
+
 const switchPlayer = function () {
   currentPlayerScore = 0;
   document.getElementById(`current--${activePlayer}`).textContent =
@@ -64,7 +65,7 @@ document.querySelector('.btn--hold').addEventListener('click', function () {
     document.querySelector(`#score--${activePlayer}`).textContent =
       scores[activePlayer];
 
-    if (scores[activePlayer] < 10) {
+    if (scores[activePlayer] < 100) {
       switchPlayer();
     } else {
       diceImg.classList.add('hidden');
@@ -72,29 +73,40 @@ document.querySelector('.btn--hold').addEventListener('click', function () {
         .querySelector(`.player--${activePlayer}`)
         .classList.add('player--winner');
       playing = false;
+
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('.player--active');
     }
   }
 });
 
 document.querySelector('.btn--new').addEventListener('click', function () {
-  console.log();
-  playing = true;
   diceImg.classList.add('hidden');
 
-  //Reinitializes TOTAL SCORES
-  currentPlayerScore = 0;
-  document.getElementById(`current--${activePlayer}`).textContent =
-    currentPlayerScore;
-  scores = [0, 0];
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.remove('player--active');
+
+  playing = true;
   activePlayer = 0;
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.add('player--active');
 
-  document.querySelector('#score--0').textContent = scores[0];
-  document.querySelector('#score--1').textContent = scores[1];
+  //Reset CURRENT SCORES
+  currentPlayerScore = 0;
+  const currentScoresEl = document.querySelectorAll('.current-score');
+  for (let i = 0; i < currentScoresEl.length; i++) {
+    currentScoresEl[i].textContent = currentPlayerScore;
+  }
 
-  //Reinitializes CURRENT SCORES
-
-  //   document.querySelector('#score--0').textContent = scores[0];
-  //   document.querySelector('#score--1').textContent = scores[1];
+  //Reset TOTAL SCORES
+  scores = [0, 0];
+  const totalScoresEl = document.querySelectorAll('.score');
+  for (let i = 0; i < totalScoresEl.length; i++) {
+    totalScoresEl[i].textContent = scores[i];
+  }
 
   const players = document.querySelectorAll('.player');
 
