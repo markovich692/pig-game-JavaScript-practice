@@ -1,5 +1,6 @@
 'use strict';
 
+let playing = true;
 let randomNumber;
 const diceImg = document.querySelector('.dice');
 const rollDicebBtn = document.querySelector('.btn--roll');
@@ -32,33 +33,39 @@ const switchPlayer = function () {
 };
 
 rollDicebBtn.addEventListener('click', function () {
-  let randomDice = Math.floor(Math.random() * 6) + 1;
-  console.log(randomDice);
+  if (playing) {
+    let randomDice = Math.floor(Math.random() * 6) + 1;
+    console.log(randomDice);
 
-  if (randomDice !== 1) {
-    diceImg.classList.remove('hidden');
-    diceImg.src = `dice-${randomDice}.png`;
-    currentPlayerScore = currentPlayerScore + randomDice;
-    document.getElementById(`current--${activePlayer}`).textContent =
-      currentPlayerScore;
-  } else {
-    console.log(activePlayer);
-    diceImg.src = `dice-${randomDice}.png`;
+    if (randomDice !== 1) {
+      diceImg.classList.remove('hidden');
+      diceImg.src = `dice-${randomDice}.png`;
+      currentPlayerScore = currentPlayerScore + randomDice;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentPlayerScore;
+    } else {
+      console.log(activePlayer);
+      diceImg.src = `dice-${randomDice}.png`;
 
-    switchPlayer();
+      switchPlayer();
+    }
   }
 });
 
 document.querySelector('.btn--hold').addEventListener('click', function () {
-  scores[activePlayer] = scores[activePlayer] + currentPlayerScore;
-  document.querySelector(`#score--${activePlayer}`).textContent =
-    scores[activePlayer];
+  if (playing) {
+    scores[activePlayer] = scores[activePlayer] + currentPlayerScore;
+    document.querySelector(`#score--${activePlayer}`).textContent =
+      scores[activePlayer];
 
-  if (scores[activePlayer] < 20) {
-    switchPlayer();
-  } else {
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.add('player--winner');
+    if (scores[activePlayer] < 100) {
+      switchPlayer();
+    } else {
+      diceImg.classList.add('hidden');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      playing = false;
+    }
   }
 });
